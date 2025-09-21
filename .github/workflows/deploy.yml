@@ -16,12 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-      
       - name: Create .env
         uses: SpicyPizza/create-envfile@v2.0
         with:
@@ -29,13 +23,6 @@ jobs:
           envkey_TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           envkey_TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
     
-  docker:
-    name: docker
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'Production'
-    steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -56,7 +43,7 @@ jobs:
     permissions:
       contents: none
     runs-on: ubuntu-latest
-    needs: docker
+    needs: build
     environment:
       name: 'Production'
       url: 'https://tuanitpro.com'
