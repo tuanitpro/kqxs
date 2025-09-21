@@ -19,9 +19,9 @@ jobs:
       - name: Create .env
         uses: SpicyPizza/create-envfile@v2.0
         with:
-          envkey_NODE_ENV: production
           envkey_TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
           envkey_TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          fail_on_empty: true
     
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
