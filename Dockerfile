@@ -9,7 +9,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -v -o main
 FROM gcr.io/distroless/static-debian12
 WORKDIR /bin
 
-COPY .env .
+# COPY .env .
 COPY --from=build /app/main .
 
 ENTRYPOINT ["main"]
